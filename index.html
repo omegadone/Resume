@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daryle Suggs - Resume</title>
+    <style>
+        /* Miami Dolphins Color Scheme: Teal (#008E97), Orange (#F58220), White (#FFFFFF) */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #FFFFFF;
+            color: #008E97;
+        }
+
+        /* Header with 3D effect */
+        header {
+            background: linear-gradient(145deg, #008E97, #00B4BA);
+            color: #FFFFFF;
+            text-align: center;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        header h1 {
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Navigation with 3D buttons */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            background: linear-gradient(145deg, #F58220, #FFA040);
+            padding: 0.75rem;
+            flex-wrap: wrap;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        nav button {
+            background: linear-gradient(145deg, #FFFFFF, #E0E0E0);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            color: #008E97;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25), inset 0 -2px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        nav button:hover {
+            background: linear-gradient(145deg, #00B4BA, #008E97);
+            color: #FFFFFF;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3), inset 0 -2px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Cards with 3D hover effects */
+        .experience-item,
+        .skill-item,
+        .education-item {
+            margin-bottom: 1rem;
+            border-left: 4px solid #F58220;
+            padding-left: 0.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: default;
+        }
+
+        .experience-item:hover,
+        .skill-item:hover,
+        .education-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.3), -4px -4px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Expandable details with smooth animation */
+        .details {
+            display: none;
+            margin-top: 0.5rem;
+            padding-left: 1rem;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .details.show {
+            display: block;
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        .details li {
+            margin-bottom: 0.25rem;
+        }
+
+        .expand-btn {
+            background-color: #008E97;
+            color: #FFFFFF;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 1rem auto;
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: linear-gradient(145deg, #FFFFFF, #E0E0E0);
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2), -4px -4px 10px rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        form:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.3), -4px -4px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.25rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            border: 1px solid #008E97;
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #F58220;
+            box-shadow: 0 0 5px #F58220;
+        }
+
+
+        @media(max-width: 600px) {
+            nav {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Daryle Suggs</h1>
+        <p>Kalamazoo, MI | 269-290-9042 | sycoevents@yahoo.com</p>
+    </header>
+
+    <nav>
+        <button onclick="loadSection('summary')">Summary</button>
+        <button onclick="loadSection('experience')">Experience</button>
+        <button onclick="loadSection('skills')">Skills</button>
+        <button onclick="loadSection('education')">Education</button>
+        <button onclick="loadSection('contact')">Contact</button>
+    </nav>
+
+
+    <section id="content">
+        <p>Click a section above to load content.</p>
+    </section>
+
+    <script>
+        // Resume data in JavaScript
+        const resume = {
+            summary: "Full-stack software engineer with 20+ years of experience designing, developing, and managing complex web and local applications. Expertise in PHP (Symfony & custom), JavaScript (Vue, jQuery), SQL/NoSQL databases, AWS deployment, and API/payment gateway integrations.",
+            experience: [
+                {
+                    title: "Computer Programming Instructor",
+                    company: "KRESA Career Connect Center",
+                    dates: "Oct 2024 – Present",
+                    details: [
+                        "Developed and implemented comprehensive programming lesson plans.",
+                        "Applied teaching strategies to improve understanding of programming concepts.",
+                        "Guided students in front-end and back-end development."
+                    ]
+                },
+                {
+                    title: "Owner, Lead Technician, Principal Software Architect",
+                    company: "Smart PC",
+                    dates: "Mar 2010 – Oct 2024",
+                    details: [
+                        "Launched and managed a MSP from the ground up.",
+                        "Designed and deployed custom ERP, CRM, accounting, and ticketing applications using PHP, JS, Python, C#, C++.",
+                        "Led technical teams and managed AWS cloud deployments.",
+                        "Integrated multiple third-party APIs and payment gateways.",
+                        "Handled scheduling, accounting, marketing, and operations for the company."
+                    ]
+                },
+                {
+                    title: "General Manager, Lead Technician, Principal Software Architect",
+                    company: "CompuTEK Force",
+                    dates: "Aug 2008 – Mar 2010",
+                    details: [
+                        "Helped launch and grow a MSP business.",
+                        "Designed and programmed custom ERP, CRM, and accounting systems using PHP, JavaScript, Python, C#, and C++.",
+                        "Managed technician and programming teams and established company policies and procedures.",
+                        "Performed advanced hardware/software services for business and residential clients.",
+                    ]
+                },
+                {
+                    title: "General Manager",
+                    company: "Advanced Certified Technicians",
+                    dates: "Jul 2006 – Aug 2008",
+                    details: [
+                        "Oversaw retail, service center, business services, and programming teams.",
+                        "Managed P&L reports, inventory, and operations.",
+                        "Programmed custom applications and ticketing systems.",
+                        "Increased business through targeted marketing campaigns.",
+                    ]
+                },
+                {
+                    title: "Contract Technician and Programmer",
+                    company: "Trinity Technology",
+                    dates: "Mar 2004 – Jul 2006",
+                    details: [
+                        "Installed and programmed smart home control systems pre-IoT.",
+                        "Developed software for device interactions using C, C#, C++, and other custom languages."
+                    ]
+                },
+                {
+                    title: "Lead Technician and Web Developer",
+                    company: "Computer Clinic",
+                    dates: "Aug 2002 – Mar 2004",
+                    details: [
+                        "Repaired, implemented, and designed business and residential systems.",
+                        "Designed, programmed, and deployed web applications using HTML, CSS, PHP, and Java.",
+                        "Built custom business applications in C, C#, and C++."
+                    ]
+                }
+            ],
+            skills: [
+                "PHP (Symfony, custom)",
+                "JavaScript (Vue, jQuery, Backbone)",
+                "Python, C#, C++",
+                "HTML5, CSS3, Sass",
+                "MySQL, PostgreSQL, MongoDB, SQLite, NoSQL",
+                "AWS, Git, Agile methodologies",
+                "API & payment gateway integrations",
+                "Unit/feature testing, front-end & back-end architecture"
+            ],
+            education: [
+                "Bachelor’s Degree in Computer and Electronics Engineering, Atlantic Technical College, June 2003"
+            ]
+        };
+
+        // Load sections dynamically
+        function loadSection(section) {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = '<p>Loading...</p>';
+
+            setTimeout(() => {
+                let html = '';
+                if (section === 'summary') {
+                    html = `<h2>Summary</h2><p>${resume.summary}</p>`;
+                } else if (section === 'experience') {
+                    html = `<h2>Experience</h2>`;
+                    resume.experience.forEach(exp => {
+                        html += `<div class="experience-item">
+                            <strong>${exp.title} — ${exp.company}</strong>
+                            <span> (${exp.dates})</span>
+                            <button class="expand-btn" onclick="toggleDetails(this)">Show Details</button>
+                            <ul class="details">`;
+                        exp.details.forEach(detail => html += `<li>${detail}</li>`);
+                        html += `</ul></div>`;
+                    });
+                } else if (section === 'skills') {
+                    html = `<h2>Skills</h2>`;
+                    resume.skills.forEach(skill => html += `<div class="skill-item">${skill}</div>`);
+                } else if (section === 'education') {
+                    html = `<h2>Education</h2>`;
+                    resume.education.forEach(edu => html += `<div class="education-item">${edu}</div>`);
+                } else if (section === 'contact') {
+                    html = `
+        <h2>Contact Me</h2>
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject:</label><br>
+                <input type="text" id="subject" name="subject">
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="expand-btn">Send Message</button>
+        </form>
+        <p id="formStatus" style="margin-top: 1rem; color:#F58220;"></p>
+    `;
+                }
+
+                contentDiv.innerHTML = html;
+                if (section === 'contact') {
+                    const contactForm = document.getElementById('contactForm');
+                    if (contactForm) {
+                        contactForm.addEventListener('submit', submitContactForm);
+                    }
+                }
+
+            }, 200);
+        }
+
+
+        // Toggle details with smooth animation
+        function toggleDetails(btn) {
+            const details = btn.nextElementSibling;
+            if (details.classList.contains('show')) {
+                details.classList.remove('show');
+                btn.textContent = 'Show Details';
+            } else {
+                details.classList.add('show');
+                btn.textContent = 'Hide Details';
+            }
+        }
+
+        // Load summary by default
+        loadSection('summary');
+    </script>
+
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
+<script>
+    // Initialize EmailJS immediately after SDK loads
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init("olPIzT2eFF81OTUqeY");
+        console.log("EmailJS initialized");
+    } else {
+        console.error("EmailJS SDK did not load");
+    }
+
+    // Contact form submit handler
+    function submitContactForm(event) {
+        event.preventDefault();
+        const formStatus = document.getElementById('formStatus');
+
+        const templateParams = {
+            from_name: document.getElementById('name').value,
+            reply_to: document.getElementById('email').value,
+            subject: document.getElementById('subject').value,
+            message: document.getElementById('message').value
+        };
+
+        console.log("Sending with params:", templateParams);
+
+        emailjs.send("service_1ztr6e2", "template_vmmg7z4", templateParams)
+            .then((res) => {
+                console.log("SUCCESS", res);
+                formStatus.textContent = "Message sent successfully!";
+                document.getElementById('contactForm').reset();
+            })
+            .catch((err) => {
+                console.log("FAILURE", err);
+                formStatus.textContent = "Failed to send message. Check console.";
+            });
+    }
+</script>
+
+
+</body>
+
+</html>
