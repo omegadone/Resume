@@ -343,42 +343,37 @@
         loadSection('summary');
     </script>
 
-    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
-<script>
-    // Initialize EmailJS immediately after SDK loads
-    if (typeof emailjs !== 'undefined') {
-        emailjs.init("olPIzT2eFF81OTUqeY");
-        console.log("EmailJS initialized");
-    } else {
-        console.error("EmailJS SDK did not load");
-    }
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-    // Contact form submit handler
-    function submitContactForm(event) {
-        event.preventDefault();
-        const formStatus = document.getElementById('formStatus');
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            emailjs.init("olPIzT2eFF81OTUqeY");
+            console.log("EmailJS initialized");
+        });
 
-        const templateParams = {
-            from_name: document.getElementById('name').value,
-            reply_to: document.getElementById('email').value,
-            subject: document.getElementById('subject').value,
-            message: document.getElementById('message').value
-        };
+        function submitContactForm(event) {
+            event.preventDefault();
+            const formStatus = document.getElementById('formStatus');
 
-        console.log("Sending with params:", templateParams);
+            const templateParams = {
+                from_name: document.getElementById('name').value,
+                reply_to: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
 
-        emailjs.send("service_1ztr6e2", "template_vmmg7z4", templateParams)
-            .then((res) => {
-                console.log("SUCCESS", res);
-                formStatus.textContent = "Message sent successfully!";
-                document.getElementById('contactForm').reset();
-            })
-            .catch((err) => {
-                console.log("FAILURE", err);
-                formStatus.textContent = "Failed to send message. Check console.";
-            });
-    }
-</script>
+            emailjs.send("service_1ztr6e2", "template_vmmg7z4", templateParams)
+                .then((res) => {
+                    console.log("SUCCESS", res);
+                    formStatus.textContent = "Message sent successfully!";
+                    document.getElementById('contactForm').reset();
+                })
+                .catch((err) => {
+                    console.log("FAILURE", err);
+                    formStatus.textContent = "Failed to send message. Check console.";
+                });
+        }
+    </script>
 
 
 </body>
