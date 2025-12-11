@@ -159,6 +159,11 @@
             box-shadow: 5 5 5px #F58220;
         }
 
+        #portfolio-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
         @media(max-width: 600px) {
             nav {
@@ -306,7 +311,7 @@
                 } else if (section === 'portfolio') { 
                     html = `<h2>Portfolio</h2>`;
                     resume.portfolio.forEach(project => {
-                        html += `<div class="portfolio-item">
+                        html += `<div id="portfolio-container"><div class="portfolio-item">
                             <strong>${project.name}</strong>
                             <img src="${project.image}" alt="Screenshot of ${project.name}" width="250" height="200">
                             <p>${project.description}</p>
