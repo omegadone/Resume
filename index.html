@@ -67,7 +67,8 @@
         /* Cards with 3D hover effects */
         .experience-item,
         .skill-item,
-        .education-item {
+        .education-item
+        .portfolio-item  {
             margin-bottom: 1rem;
             border-left: 4px solid #F58220;
             padding-left: 0.5rem;
@@ -77,7 +78,8 @@
 
         .experience-item:hover,
         .skill-item:hover,
-        .education-item:hover {
+        .education-item:hover
+        ..portfolio-item :hover {
             transform: translateY(-5px) scale(1.02);
             box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.3), -4px -4px 15px rgba(255, 255, 255, 0.2);
         }
@@ -145,6 +147,16 @@
             outline: none;
             border-color: #F58220;
             box-shadow: 0 0 5px #F58220;
+        }
+
+        .portfolio-item {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: center;
+            width: 30%;
+            border: #008E97;
+            box-shadow: 5 5 5px #F58220;
         }
 
 
